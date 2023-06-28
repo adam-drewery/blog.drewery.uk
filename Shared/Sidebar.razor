@@ -24,7 +24,7 @@
         @{ var tags = SiteContext.Posts.SelectMany(p => p.Tags).Distinct(); }
         @foreach(var tag in tags)
         {
-            <a href="#">@tag</a>
+            <a href="/#">@tag</a>
         }
         
     </div>
@@ -39,12 +39,12 @@
         {
             <li class="clearfix">
                 <div class="wi">
-                    <a href="code/@post.Id">
+                    <a href="/code/@post.Id">
                         <img src="images/works/img1.jpg" alt="" class="img-fluid">
                     </a>
                 </div>
                 <div class="wb">
-                    <a href="code/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
+                    <a href="/code/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
                 </div>
             </li>
         }
@@ -56,10 +56,10 @@
     <div class="widget-title">Archives</div>
 
     <ul>
-        <li><a href="#">March 2019</a> (40)</li>
-        <li><a href="#">April 2019</a> (08)</li>
-        <li><a href="#">May 2019</a> (11)</li>
-        <li><a href="#">Jun 2019</a> (21)</li>
+        <li><a href="/#">March 2019</a> (40)</li>
+        <li><a href="/#">April 2019</a> (08)</li>
+        <li><a href="/#">May 2019</a> (11)</li>
+        <li><a href="/#">Jun 2019</a> (21)</li>
     </ul>
 
 </aside>
@@ -68,9 +68,9 @@
     <div class="widget-title">Me on other sites</div>
 
     <ul class="socials">
-        <li><a href="http://facebook.com"><i class="mdi mdi-github-circle"></i></a></li>
-        <li><a href="http://twitter.com"><i class="mdi mdi-stackoverflow"></i></a></li>
-        <li><a href="http://instagram.com"><i class="mdi mdi-linkedin"></i></a></li>
+        <li><a href="/http://facebook.com"><i class="mdi mdi-github-circle"></i></a></li>
+        <li><a href="/http://twitter.com"><i class="mdi mdi-stackoverflow"></i></a></li>
+        <li><a href="/http://instagram.com"><i class="mdi mdi-linkedin"></i></a></li>
     </ul>
 
 </aside>
