@@ -27,6 +27,9 @@ jobs:
 
     - name: Disable Jekyll
       run: touch release/wwwroot/.nojekyll
+
+    - name: copy index.html to 404.html
+      run: cp $GITHUB_WORKSPACE/$PUBLISH_FOLDER/index.html $GITHUB_WORKSPACE/$PUBLISH_FOLDER/404.html
       
     - name: Configure Pages
       uses: actions/configure-pages@v3
