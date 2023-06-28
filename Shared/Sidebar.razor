@@ -1,0 +1,76 @@
+﻿@inject NavigationManager NavigationManager
+
+@code {
+
+    public string SearchTerms { get; set; }
+}
+@inject SiteContext SiteContext
+
+<!-- Search widget-->
+<aside class="widget widget_search">
+    <form action="/search">
+        <input class="form-control pr-5" type="search" placeholder="Search...">
+        <button class="search-button" type="submit">
+            <span class="mdi mdi-magnify"></span>
+        </button>
+    </form>
+</aside>
+
+<!-- Tags widget-->
+<aside class="widget widget_tag_cloud">
+    <div class="widget-title">Tags</div>
+    <div class="tagcloud">
+        
+        @{ var tags = SiteContext.Posts.SelectMany(p => p.Tags).Distinct(); }
+        @foreach(var tag in tags)
+        {
+            <a href="#">@tag</a>
+        }
+        
+    </div>
+</aside>
+
+<!-- Recent entries widget-->
+<aside class="widget widget_recent_entries_custom">
+    <div class="widget-title">Recent Posts</div>
+    <ul>
+        
+        @foreach(var post in SiteContext.Posts.Take(3))
+        {
+            <li class="clearfix">
+                <div class="wi">
+                    <a href="/code/@post.Id">
+                        <img src="images/works/img1.jpg" alt="" class="img-fluid">
+                    </a>
+                </div>
+                <div class="wb">
+                    <a href="/code/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
+                </div>
+            </li>
+        }
+    </ul>
+</aside>
+
+<!-- Archives widget-->
+<aside class="widget">
+    <div class="widget-title">Archives</div>
+
+    <ul>
+        <li><a href="#">March 2019</a> (40)</li>
+        <li><a href="#">April 2019</a> (08)</li>
+        <li><a href="#">May 2019</a> (11)</li>
+        <li><a href="#">Jun 2019</a> (21)</li>
+    </ul>
+
+</aside>
+
+<aside class="widget about-widget">
+    <div class="widget-title">Me on other sites</div>
+
+    <ul class="socials">
+        <li><a href="http://facebook.com"><i class="mdi mdi-github-circle"></i></a></li>
+        <li><a href="http://twitter.com"><i class="mdi mdi-stackoverflow"></i></a></li>
+        <li><a href="http://instagram.com"><i class="mdi mdi-linkedin"></i></a></li>
+    </ul>
+
+</aside>
