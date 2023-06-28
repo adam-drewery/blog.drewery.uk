@@ -22,14 +22,14 @@ jobs:
       with:
         dotnet-version: 7.0.x
           
+    - name: copy index.html to 404.html
+      run: cp wwwroot/index.html wwwroot/404.html
+          
     - name: .NET Publish
       run: dotnet publish blog.csproj -c Release -o release --nologo
 
     - name: Disable Jekyll
       run: touch release/wwwroot/.nojekyll
-
-    - name: copy index.html to 404.html
-      run: cp /home/runner/work/blog/blog/release/index.html /home/runner/work/blog/blog/release/404.html
       
     - name: Configure Pages
       uses: actions/configure-pages@v3
