@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\CNAME" />
     <None Include="wwwroot\code\test1.md" />
     <None Include="wwwroot\code\test2.md" />
   </ItemGroup>
