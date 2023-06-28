@@ -1,4 +1,12 @@
 @inject SiteContext SiteContext
+@inject IJSRuntime JSRuntime
+
+@code{
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("setupPhoto");
+    }
+}
 
 <div class="slimscroll-menu" id="remove-scroll">
     <div id="sidebar-menu" style="padding: 1em">
@@ -7,7 +15,7 @@
             @* <div class="widget-title">Adam Drewery</div> *@
 
             <div class="text-center">
-                <img src="images/me.jpg" alt="About Me" class="rounded-circle">
+                <img id="photo" src="images/me.jpg" alt="About Me" class="rounded-circle">
 
                 <p>Hello fellow traveller. Its, me, Adam! I'm a programmer, music lover, and slayer of dangerous goblinoids. </p>
             </div>
@@ -76,6 +84,11 @@
                 <li>
                     <a href="@SiteContext.LinkedIn">
                         <i class="mdi mdi-linkedin"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@SiteContext.RssFeed">
+                        <i class="mdi mdi-rss"></i>
                     </a>
                 </li>
             </ul>
