@@ -32,7 +32,7 @@
                 @{ var tags = SiteContext.Posts.SelectMany(p => p.Tags).Distinct(); }
                 @foreach (var tag in tags)
                 {
-                    <a href="/tag/@tag">@tag</a>
+                    <a href="tag/@tag">@tag</a>
                 }
 
             </div>
@@ -47,12 +47,12 @@
                 {
                     <li class="clearfix">
                         <div class="wi">
-                            <a href="/code/@post.Id">
+                            <a href="code/@post.Id">
                                 <img src="images/works/img1.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                         <div class="wb">
-                            <a href="/code/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
+                            <a href="code/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
                         </div>
                     </li>
                 }
@@ -89,7 +89,7 @@
             <ul>
                 @foreach (var post in SiteContext.Posts)
                 {
-                    <li><a href="/code/@post.Id">@post.Title</a> (@post.Date)</li>
+                    <li><a href="code/@post.Id">@post.Title</a> (@post.Date)</li>
                 }
             </ul>
 
