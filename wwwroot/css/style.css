@@ -17,11 +17,12 @@
 body {
     font-family: 'Nunito Sans', sans-serif;
     margin: 35px;
-    background-color: #f0f4f7;
+    background-color: #212121;
+    color: #ccc;
 }
 
 html {
-    background-color: #e1e6ed;
+    background-color: #212121;
 }
 
 a,
@@ -78,7 +79,7 @@ h6 {
 .btn-outline-custom:hover,
 .btn-outline-custom:active,
 .show>.btn-outline-custom.dropdown-toggle {
-    color: #fff;
+    color: #212121;
 }
 
 .btn-outline-custom.focus,
@@ -110,7 +111,7 @@ h6 {
 .nav-second-level li a,
 .nav-thrid-level li a {
     padding: 8px 20px 8px 20px;
-    color: #a0a0a0;
+    color: #313131;
     transition: all 0.5s;
     display: block;
     text-decoration: none;
@@ -211,7 +212,7 @@ textarea {
 body.enlarged .side-menu {
     display: block;
     position: fixed;
-    background-color: #fff;
+    background-color: #212121;
     top: 0;
     bottom: 0;
     overflow: auto;
@@ -224,7 +225,7 @@ body.enlarged .side-menu {
 
 .page-wrapper {
     margin-left: 280px;
-    background-color: #ffffff;
+    background-color: #212121;
     padding: 0 20px;
 }
 
@@ -233,7 +234,7 @@ body.enlarged .side-menu {
 }
 
 .post + .post {
-    border-top: 1px solid rgba(238, 238, 238, .7);
+    border-top: 1px solid #313131;
     padding-top: 50px;
 }
 
@@ -257,7 +258,7 @@ body.enlarged .side-menu {
 }
 
 .post-title a {
-    color: #333;
+    color: #ccc;
     -webkit-transition: all .3s ease-out;
     transition: all .3s ease-out;
 }
@@ -267,7 +268,7 @@ body.enlarged .side-menu {
     padding: 0;
     margin: 0;
     opacity: .7;
-    color: #000;
+    color: #bbb;
     font-weight: 600;
 }
 
@@ -283,7 +284,7 @@ body.enlarged .side-menu {
 
 .post .post-meta a,
 .post-meta a {
-    color: #000;
+    color: #bbb;
     transition: all 0.5s;
     font-weight: 600;
 }
@@ -293,7 +294,7 @@ body.enlarged .side-menu {
 }
 
 .post-tags a {
-    background-color: #f5f5f5;
+    background-color: #212121;
     border-radius: 2px;
     display: inline-block;
     text-transform: uppercase;
@@ -307,7 +308,7 @@ body.enlarged .side-menu {
 
 .post-tags a:hover,
 .post-tags a:focus {
-    color: #fff;
+    color: #212121;
 }
 
 .post-content h1,
@@ -397,7 +398,7 @@ body.enlarged .side-menu {
     position: absolute;
     bottom: 0;
     width: 100%;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #313131;
 }
 
 .widget-title:after {
@@ -410,6 +411,7 @@ body.enlarged .side-menu {
 }
 
 .widget {
+    color: #bbb;
     margin: 0 0 40px;
     font-size: 14px;
 }
@@ -434,7 +436,7 @@ body.enlarged .side-menu {
 
 .widget ul li a,
 .widget ol li a {
-    color: #333333;
+    color: #bbb;
     transition: all 0.5s;
 }
 
@@ -442,7 +444,7 @@ body.enlarged .side-menu {
     width: 100%;
     box-shadow: none;
     border-radius: 2px;
-    border-color: #eee;
+    border-color: #313131;
     padding: 12px 15px;
     height: 49px;
     font-size: 14px;
@@ -471,9 +473,9 @@ body.enlarged .side-menu {
 }
 
 .tagcloud > a {
-    background: #f5f5f5;
+    background: #515151;
     border-radius: 2px;
-    color: #303133;
+    color: #ccc;
     font-weight: 700;
     display: inline-block;
     font-size: 9px;
@@ -485,7 +487,7 @@ body.enlarged .side-menu {
 }
 
 .tagcloud > a:hover {
-    color: #fff;
+    color: #212121;
 }
 
 .widget_recent_entries_custom ul li {
@@ -505,7 +507,7 @@ body.enlarged .side-menu {
 }
 
 .widget_recent_entries_custom .wb a {
-    color: #303133;
+    color: #bbb;
 }
 
 .text-widget-des {
@@ -531,7 +533,7 @@ body.enlarged .side-menu {
 }
 
 .post-author-box .socials li a:hover {
-    color: #ffffff !important;
+    color: #212121 !important;
 }
 
 .socials li:first-child {
@@ -548,7 +550,7 @@ body.enlarged .side-menu {
     transition: all 0.5s;
     background-color: #4a4a4a;
     border-radius: 50%;
-    color: #fff !important;
+    color: #212121 !important;
 }
 
 .form-control {
@@ -595,7 +597,7 @@ textarea.form-control {
     width: 36px;
     height: 36px;
     line-height: 34px;
-    background-color: #ffffff;
+    background-color: #212121;
     color: #070e14 !important;
     border: 1px solid #eee;
 }
@@ -614,7 +616,7 @@ textarea.form-control {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 7px;
-    color: #303133;
+    color: #bbb;
     padding: 7px 8px 5px 10px;
     margin: 5px 10px 5px 0;
 }
@@ -645,7 +647,7 @@ textarea.form-control {
 .post-tags a:hover,
 .post-tags a:focus {
     background: #d09c8e;
-    color: #fff;
+    color: #212121;
 }
 
 .post-content h1,
@@ -687,7 +689,7 @@ textarea.form-control {
 }
 
 .related-post .post-header a {
-    color: #333;
+    color: #ccc;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -722,7 +724,7 @@ textarea.form-control {
 }
 
 .link-post {
-    color: rgba(255, 255, 255, 0.6);
+    color: #ddd;
     text-align: center;
     padding: 20px;
     border-radius: 5px;
@@ -734,7 +736,7 @@ textarea.form-control {
 }
 
 .link-post a {
-    color: #fff;
+    color: #ddd;
 }
 
 .link-post-content {
@@ -781,9 +783,9 @@ textarea.form-control {
 
 .pagination > li > a,
 .pagination > li > span {
-    border: 2px solid #eeeeee;
+    border: 2px solid #888;
     border-radius: 3px;
-    color: #777777;
+    color: #bbb;
     display: block;
     float: none;
     padding: 8px 15px;
@@ -794,7 +796,7 @@ textarea.form-control {
 .pagination > .active > span {
     background: #27cbc0 none repeat scroll 0 0;
     border-color: #27cbc0;
-    color: #ffffff;
+    color: #bbb;
 }
 
 .pagination > li > a:hover,
@@ -803,7 +805,7 @@ textarea.form-control {
 .pagination > li > span:focus {
     background: #666 none repeat scroll 0 0;
     border-color: #666;
-    color: #ffffff;
+    color: #bbb;
 }
 
 .pagination > .active > a,
@@ -814,7 +816,7 @@ textarea.form-control {
 .pagination > .active > span:hover {
     background-color: #666;
     border-color: #666;
-    color: #fff;
+    color: #bbb;
     cursor: default;
     z-index: 3;
 }

@@ -9,7 +9,7 @@
             <div class="text-center">
                 <img src="images/me.jpg" alt="About Me" class="rounded-circle">
 
-                <p class="text-muted">Hello fellow traveller. Its, me, Adam. I'm a programmer, music lover, and slayer of dangerous goblinoids. </p>
+                <p>Hello fellow traveller. Its, me, Adam! I'm a programmer, music lover, and slayer of dangerous goblinoids. </p>
             </div>
 
         </aside>
@@ -17,7 +17,7 @@
         <!-- Search widget-->
         <aside class="widget widget_search">
             <form action="/search">
-                <input name="q" class="form-control pr-5" type="search" placeholder="Search...">
+                <input name="q" class="form-control pr-5" style="background-color: #333; color: #eee" type="search" placeholder="Search...">
                 <button class="search-button" type="submit">
                     <span class="mdi mdi-magnify"></span>
                 </button>
@@ -47,12 +47,12 @@
                 {
                     <li class="clearfix">
                         <div class="wi">
-                            <a href="/code/@post.Id">
+                            <a href="/@post.Id">
                                 <img src="images/works/img1.jpg" alt="" class="img-fluid">
                             </a>
                         </div>
                         <div class="wb">
-                            <a href="/code/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
+                            <a href="/post/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
                         </div>
                     </li>
                 }
@@ -89,7 +89,7 @@
             <ul>
                 @foreach (var post in SiteContext.Posts)
                 {
-                    <li><a href="/code/@post.Id">@post.Title</a> (@post.Date)</li>
+                    <li><a href="/post/@post.Id">@post.Title</a> (@post.Date)</li>
                 }
             </ul>
 

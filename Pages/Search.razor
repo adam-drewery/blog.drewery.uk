@@ -5,7 +5,7 @@
 
 @code {
 
-    public string SearchTerm { get; set; }
+    public string? SearchTerm { get; set; }
 
     protected override Task OnParametersSetAsync()
     {
@@ -38,24 +38,23 @@
     <section class="mt-3 pb-3">
         <div class="container">
             <div class="row">
-                <!-- Content-->
                 <div class="col-xl-8">
-
-                    @{ var posts = SiteContext.Posts.Where(p => p.Title.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)); }
+                    @{
+                        var posts = SiteContext.Posts
+                            .Where(p => p.Title.Contains(SearchTerm ?? "", StringComparison.OrdinalIgnoreCase));
+                    }
                     @foreach (var post in posts)
                     {
-                        <!-- Post-->
                         <article class="post">
 
                             <div class="post-header">
                                 <h2 class="post-title">
-                                    <a href="/code/@post.Id">@post.Title</a>
+                                    <a href="/post/@post.Id">@post.Title</a>
                                 </h2>
                                 <ul class="post-meta">
                                     <li>
                                         <i class="mdi mdi-calendar"></i> @post.Date
                                     </li>
-
                                     @{ var delimiter = ""; }
                                     @foreach (var tag in post.Tags)
                                     {
@@ -64,28 +63,21 @@
                                         </li>
                                         delimiter = ", ";
                                     }
-
                                     <li>
                                         <i class="mdi mdi-comment-multiple-outline"></i> <a href="/#">0 Comments</a>
                                     </li>
                                 </ul>
                             </div>
-
                             <div class="post-preview">
                                 <a href="/#">
                                     <img src="/images/blog/blog-1.jpg" alt="" class="img-fluid rounded">
                                 </a>
                             </div>
-
                             <div class="post-content">
                                 <p>Whether an identity or campaign, we make your brand visible, relevant and effective by placing the digital at the center of its ecosystem, without underestimating the power of traditional media. Whether an identity or campaign, we make your brand visible.</p>
                             </div>
-
                         </article>
-                        <!-- Post end-->
                     }
-
-                    <!-- Pagination-->
                     <div class="row">
                         <div class="col-lg-12">
                             <ul class="pagination">
@@ -117,19 +109,8 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Pagination end-->
                 </div>
-                <!-- Content end-->
-
-                @* <!-- Sidebar--> *@
-                @* <div class="col-xl-4"> *@
-                @*     <div class="sidebar"> *@
-                @*         <Sidebar /> *@
-                @*     </div> *@
-                @* </div> *@
-                @* <!-- Sidebar end--> *@
             </div>
         </div>
-        <!-- end container -->
     </section>
 </div>

@@ -4,7 +4,7 @@
 @code {
 
     [Parameter]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 }
 
 <div class="page-wrapper">
@@ -41,7 +41,7 @@
 
                             <div class="post-header">
                                 <h2 class="post-title">
-                                    <a href="/code/@post.Id">@post.Title</a>
+                                    <a href="/post/@post.Id">@post.Title</a>
                                 </h2>
                                 <ul class="post-meta">
                                     <li>

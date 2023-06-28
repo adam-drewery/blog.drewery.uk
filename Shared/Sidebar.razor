@@ -2,7 +2,7 @@
 
 @code {
 
-    public string SearchTerms { get; set; }
+    public string? SearchTerms { get; set; }
 }
 @inject SiteContext SiteContext
 
@@ -39,12 +39,12 @@
         {
             <li class="clearfix">
                 <div class="wi">
-                    <a href="/code/@post.Id">
+                    <a href="/post/@post.Id">
                         <img src="images/works/img1.jpg" alt="" class="img-fluid">
                     </a>
                 </div>
                 <div class="wb">
-                    <a href="/code/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
+                    <a href="/post/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
                 </div>
             </li>
         }
