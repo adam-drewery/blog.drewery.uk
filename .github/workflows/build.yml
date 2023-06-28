@@ -19,8 +19,15 @@ jobs:
     - name: Publish .NET Core Project
       run: dotnet publish blog.csproj -c Release -o release --nologo
       
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./release/wwwroot
+        # Upload entire repository
+        path: './release/wwwroot'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
