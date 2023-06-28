@@ -1,18 +1,15 @@
-name: Deploy to GitHub Pages
+name: Build & Deploy
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: GitHub Pages Deployment
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
     
     - uses: actions/checkout@v2
@@ -39,6 +36,12 @@ jobs:
       with:
         path: './release/wwwroot'
         
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: GitHub Pages Deployment
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:      
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v2
