@@ -77,5 +77,8 @@ window.loadUtterances = () => {
     script.onload = function() {
         const utterances = document.querySelector('.utterances');
         if (utterances) utterances.className = 'col-xl-8';
+        
+        const iframe = document.querySelector('.utterances-frame');
+        if (iframe) iframe.className = 'col-xl-8 utterances-frame';
     };
 }
