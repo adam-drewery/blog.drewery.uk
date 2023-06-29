@@ -11,6 +11,6 @@ var http = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAd
 var siteContext = await SiteContext.InitializeAsync(http);
 
 builder.Services.AddScoped(_ => http);
-builder.Services.AddSingleton(_ => siteContext);
+builder.Services.AddScoped(_ => siteContext);
 
 await builder.Build().RunAsync();

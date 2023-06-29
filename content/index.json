@@ -1,7 +1,7 @@
 {
   "test1": {
     "Title": "Anti Patterns",
-    "date": "2023-06-27",
+    "date": "29-06-2023",
     "image": "test1.jpg",
     "tags": [
       "anti patterns"
@@ -9,7 +9,7 @@
   },
   "test2": {
     "Title": "Trolley Problems",
-    "date": "2023-06-28",
+    "date": "30-06-2023",
     "image": "test2.jpg",
     "tags": [
       "philosophy"

@@ -35,18 +35,19 @@
                                     <li>
                                         <i class="mdi mdi-calendar"></i> @post.Date
                                     </li>
-
                                     @{ var delimiter = ""; }
                                     @foreach (var tag in post.Tags)
                                     {
                                         <li>
-                                            <i class="mdi mdi-tag-text-outline"></i> <a href="/tag/@tag">@tag@delimiter</a>
+                                            <i class="mdi mdi-tag-text-outline"></i>
+                                            <a href="/tag/@tag">@tag@delimiter</a>
                                         </li>
                                         delimiter = ", ";
                                     }
-
                                     <li>
-                                        <i class="mdi mdi-comment-multiple-outline"></i> <a href="/#">0 Comments</a>
+                                        <i class="mdi mdi-comment-multiple-outline"></i>
+                                        @{ var commentLabel = post.CommentCount == 1 ? "comment" : "comments"; }
+                                        <a href="/post/@post.Id">@post.CommentCount @commentLabel</a>
                                     </li>
                                 </ul>
                             </div>
@@ -60,37 +61,7 @@
                             </div>
                         </article>
                     }
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul class="pagination">
-                                <li class="next">
-                                    <a href="/#">
-                                        <i class="mdi mdi-chevron-left"></i>
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="/#">1</a>
-                                </li>
-                                <li>
-                                    <a href="/#">2</a>
-                                </li>
-                                <li>
-                                    <a href="/#">3</a>
-                                </li>
-                                <li>
-                                    <a href="/#">4</a>
-                                </li>
-                                <li>
-                                    <a href="/#">5</a>
-                                </li>
-                                <li class="prev">
-                                    <a href="/#">
-                                        <i class="mdi mdi-chevron-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <Pagination />
                 </div>
             </div>
         </div>

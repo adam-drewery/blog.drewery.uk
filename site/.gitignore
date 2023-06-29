@@ -248,11 +248,5 @@ ModelManifest.xml
 .vscode/tasks.json
 .vscode/launch.json
 *.pbf
-
-# Maps data
-MapsData/
-/Kartel.Api/*.blob
-*.http
 .terraform/
 .terraform.lock.hcl
-.idea/

@@ -54,3 +54,28 @@ window.setupPhoto = () => {
         isMouseOver = false;
     };
 }
+
+window.fitImages = () => {
+    const images = document.querySelectorAll('.container img');
+    for (let i = 0; i < images.length; i++) {
+        images[i].classList.add('img-fluid');
+    }
+}
+
+window.loadUtterances = () => {
+    const script = document.createElement("script");
+    script.src = "https://utteranc.es/client.js";
+    script.setAttribute("repo", "adam-drewery/blog");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-dark");
+    script.setAttribute("crossorigin", "anonymous");
+    script.setAttribute("async", "true");
+
+    const commentsDiv = document.getElementById("comments");
+    if (commentsDiv) commentsDiv.replaceWith(script);
+
+    script.onload = function() {
+        const utterances = document.querySelector('.utterances');
+        if (utterances) utterances.className = 'col-xl-8';
+    };
+}
