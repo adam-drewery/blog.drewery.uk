@@ -21,7 +21,7 @@ const feed = new RSS({
 for (const articleId in index) {
     const article = index[articleId];
 
-    const response = axios.get("blog.drewery.uk/raw/" + articleId).;
+    const response = axios.get("blog.drewery.uk/raw/" + articleId);
     
     feed.item({
         title:  article.title,
