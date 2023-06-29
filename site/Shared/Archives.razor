@@ -1,0 +1,13 @@
+@inject SiteContext SiteContext
+
+<aside class="widget">
+    <div class="widget-title">Archives</div>
+
+    <ul>
+        @foreach (var post in SiteContext.Posts)
+        {
+            <li><a href="/post/@post.Id">@post.Title</a> (@post.Date)</li>
+        }
+    </ul>
+
+</aside>

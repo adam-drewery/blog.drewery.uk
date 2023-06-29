@@ -111,7 +111,7 @@ h6 {
 .nav-second-level li a,
 .nav-thrid-level li a {
     padding: 8px 20px 8px 20px;
-    color: #313131;
+    color: #ccc;
     transition: all 0.5s;
     display: block;
     text-decoration: none;
@@ -130,7 +130,7 @@ h6 {
 }
 
 #sidebar-menu > ul > li > a {
-    color: #000;
+    color: #ccc;
     display: block;
     padding: 14px 20px;
     text-decoration: none !important;

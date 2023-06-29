@@ -1,0 +1,20 @@
+@inject SiteContext SiteContext
+
+<aside class="widget widget_recent_entries_custom">
+    <div class="widget-title">Recent Posts</div>
+    <ul>
+        @foreach (var post in SiteContext.Posts.Take(3))
+        {
+            <li class="clearfix">
+                <div class="wi">
+                    <a href="/@post.Id">
+                        <img src="images/works/img1.jpg" alt="" class="img-fluid">
+                    </a>
+                </div>
+                <div class="wb">
+                    <a href="/post/@post.Id">@post.Title</a> <span class="post-date">@post.Date</span>
+                </div>
+            </li>
+        }
+    </ul>
+</aside>

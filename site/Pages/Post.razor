@@ -4,6 +4,7 @@
 @using Markdig
 
 @code {
+
     [Parameter]
     public string? Id { get; set; }
 
@@ -11,9 +12,9 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        var markdown  = await Http.GetStringAsync($"https://raw.githubusercontent.com/adam-drewery/blog/main/content/{Id}.md")
-                        ?? throw new InvalidOperationException("Failed to get blog content");
-        
+        var markdown = await Http.GetStringAsync($"https://raw.githubusercontent.com/adam-drewery/blog/main/content/{Id}.md")
+                       ?? throw new InvalidOperationException("Failed to get blog content");
+
         _content = Markdown.ToHtml(markdown);
     }
 
@@ -23,14 +24,22 @@
         await JsRuntime.InvokeVoidAsync("highlightCode");
         await JsRuntime.InvokeVoidAsync("loadUtterances");
     }
+
 }
 
 <div class="page-wrapper">
     <section class="pb-5">
         <div class="container">
+            <a href="/" class="btn btn-outline-custom">
+                <i class="mdi mdi-step-backward"></i>
+                Go back
+            </a>
             <div class="row pt-5">
                 <div class="col-xl-8">
-                    @if (_content != null) { @((MarkupString)_content) }
+                    @if (_content != null)
+                    {
+                        @((MarkupString)_content)
+                    }
                 </div>
                 <div id="comments" class="col-xl-8"></div>
             </div>

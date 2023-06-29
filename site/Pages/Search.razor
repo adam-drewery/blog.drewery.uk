@@ -13,11 +13,16 @@
         SearchTerm = query.TryGetValue("q", out var searchTerm) ? searchTerm.ToString() : "";
         return base.OnParametersSetAsync();
     }
+
 }
 
 <div class="page-wrapper">
     <section>
         <div class="container">
+            <a href="/" class="btn btn-outline-custom">
+                <i class="mdi mdi-step-backward"></i>
+                Go back
+            </a>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-title">
@@ -29,7 +34,6 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/">Go back</a>
                 </div>
             </div>
         </div>
@@ -77,7 +81,7 @@
                             </div>
                         </article>
                     }
-                    <Pagination />
+                    <Pagination/>
                 </div>
             </div>
         </div>

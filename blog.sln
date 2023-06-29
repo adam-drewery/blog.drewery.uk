@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blog", "site\blog.csproj", "{354EB80A-6F8F-472A-BEAA-06261B0D752F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rss", "rss", "{E9DF07FE-FB3A-4037-9243-1FB2F7AC5707}"
+	ProjectSection(SolutionItems) = preProject
+		rss\generate-rss.js = rss\generate-rss.js
+		rss\package.json = rss\package.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{F8A5A443-9919-4859-BEC6-938D177A4B3A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		COPYING.WTFPL = COPYING.WTFPL
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{354EB80A-6F8F-472A-BEAA-06261B0D752F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{354EB80A-6F8F-472A-BEAA-06261B0D752F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354EB80A-6F8F-472A-BEAA-06261B0D752F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{354EB80A-6F8F-472A-BEAA-06261B0D752F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

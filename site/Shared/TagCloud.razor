@@ -1,0 +1,14 @@
+@inject SiteContext SiteContext
+
+<aside class="widget widget_tag_cloud">
+    <div class="widget-title">Tags</div>
+    <div class="tagcloud">
+
+        @{ var tags = SiteContext.Posts.SelectMany(p => p.Tags).Distinct(); }
+        @foreach (var tag in tags)
+        {
+            <a href="/tag/@tag">@tag</a>
+        }
+
+    </div>
+</aside>
