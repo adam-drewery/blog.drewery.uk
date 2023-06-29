@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "rss": "^1.2.2"
+    "rss": "^1.2.2",
+    "axios": "^0.21.1"
   }
 }
