@@ -23,7 +23,7 @@ for (const articleId in index) {
     
     feed.item({
         title:  article.title,
-        description: marked(data),
+        description: marked(markdown),
         url: `https://blog.drewery.uk/post/${articleId}`,
         date: article.date
     });
