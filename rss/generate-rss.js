@@ -10,7 +10,7 @@ const feed = new RSS({
     description: '',
     feed_url: 'https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml',
     site_url: 'blog.drewery.uk',
-    managingEditor: 'Adam Drewery,
+    managingEditor: 'Adam Drewery',
     webMaster: 'Adam Drewery',
     language: 'en',
     pubDate: new Date().toUTCString(),
