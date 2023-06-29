@@ -1,6 +1,6 @@
 {
   "test1": {
-    "Title": "Anti Patterns",
+    "title": "Anti Patterns",
     "date": "29-06-2023",
     "image": "test1.jpg",
     "tags": [
@@ -8,7 +8,7 @@
     ]
   },
   "test2": {
-    "Title": "Trolley Problems",
+    "title": "Trolley Problems",
     "date": "30-06-2023",
     "image": "test2.jpg",
     "tags": [
