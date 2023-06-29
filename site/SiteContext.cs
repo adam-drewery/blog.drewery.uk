@@ -56,7 +56,7 @@ internal class SiteContext
 
 internal class CommentDetails
 {
-    public string Title { get; set; }
+    public string Title { get; set; } = null!;
 
     public int Comments { get; set; }
 }

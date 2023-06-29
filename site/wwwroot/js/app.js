@@ -63,6 +63,15 @@ window.fitImages = () => {
 }
 
 window.loadUtterances = () => {
+    // Get existing Utterances comments and script elements
+    const utterances = document.querySelector('.utterances');
+    const utterancesScript = document.querySelector('script[src="https://utteranc.es/client.js"]');
+
+    // If they exist, remove them
+    if (utterances) utterances.remove();
+    if (utterancesScript) utterancesScript.remove();
+
+    // Create a new script element for Utterances
     const script = document.createElement("script");
     script.src = "https://utteranc.es/client.js";
     script.setAttribute("repo", "adam-drewery/blog");
@@ -71,14 +80,7 @@ window.loadUtterances = () => {
     script.setAttribute("crossorigin", "anonymous");
     script.setAttribute("async", "true");
 
+    // Get the comments div and append the script to it
     const commentsDiv = document.getElementById("comments");
-    if (commentsDiv) commentsDiv.replaceWith(script);
-
-    script.onload = function() {
-        const utterances = document.querySelector('.utterances');
-        if (utterances) utterances.className = 'col-xl-8';
-        
-        const iframe = document.querySelector('.utterances-frame');
-        if (iframe) iframe.className = 'col-xl-8 utterances-frame';
-    };
+    if (commentsDiv) commentsDiv.appendChild(script);
 }
