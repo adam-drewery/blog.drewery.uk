@@ -1,12 +1,12 @@
 window.initializeMenu = () => {
-    //metis menu
-    $("#side-menu").metisMenu();
-
-    // Left menu collapse
-    $('.button-menu-mobile').on('click', function (event) {
-        event.preventDefault();
-        $("body").toggleClass("enlarged");
-    });
+    // //metis menu
+    // $("#side-menu").metisMenu();
+    //
+    // // Left menu collapse
+    // $('.button-menu-mobile').on('click', function (event) {
+    //     event.preventDefault();
+    //     $("body").toggleClass("enlarged");
+    // });
 }
 
 window.highlightCode = () => { hljs.highlightAll(); };
