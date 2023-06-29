@@ -5,7 +5,6 @@ const axios = require('axios');
 // Read index.json
 const index = JSON.parse(fs.readFileSync('content/index.json', 'utf8'));
 
-// Create a feed
 const feed = new RSS({
     title: 'Adam Drewery\'s Blog',
     description: '',
@@ -17,7 +16,6 @@ const feed = new RSS({
     pubDate: new Date().toUTCString(),
 });
 
-// Loop over the articles in the index and add them to the feed
 for (const articleId in index) {
     const article = index[articleId];
 
@@ -25,12 +23,9 @@ for (const articleId in index) {
     
     feed.item({
         title:  article.title,
-        description: 'You can add a description here',
-        url: `https://yourwebsite.com/${articleId}`, // URL of the article
-        date: article.date,
-        
-        // Add the article content as HTML
-        content: response.data
+        description: response.data,
+        url: `https://blog.drewery.uk/post/${articleId}`,
+        date: article.date
     });
 }
 
