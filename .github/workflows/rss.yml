@@ -1,4 +1,4 @@
-name: Generate RSS
+name: RSS Feed
 on:
   push:
     branches: [ "main" ]
@@ -8,7 +8,7 @@ on:
     - '.github/workflows/rss.yml'
 
 jobs:
-  generate-rss:
+  build:
     runs-on: ubuntu-latest
     steps:
 
