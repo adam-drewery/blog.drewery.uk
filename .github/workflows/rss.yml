@@ -1,0 +1,33 @@
+name: Generate RSS
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+    - 'rss/**'
+    - 'content/**'
+
+jobs:
+  generate-rss:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install ./rss
+
+    - name: Generate RSS
+      run: node rss/generate-rss.js
+
+    - name: Commit and push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add rss/rss.xml
+        git commit -m "Generate RSS feed" -a || echo "No changes to commit"
+        git push
