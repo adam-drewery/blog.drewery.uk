@@ -255,3 +255,4 @@ MapsData/
 *.http
 .terraform/
 .terraform.lock.hcl
+.idea/
