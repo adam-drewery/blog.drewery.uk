@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "rss": "^1.2.2",
-    "axios": "^0.21.1"
+    "marked": "^2.1.3"
   }
 }

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const RSS = require('rss');
-const axios = require('axios');
+const marked = require('marked');
 
 // Read index.json
 const index = JSON.parse(fs.readFileSync('content/index.json', 'utf8'));
@@ -19,15 +19,14 @@ const feed = new RSS({
 for (const articleId in index) {
     const article = index[articleId];
 
-    const response = axios.get("blog.drewery.uk/raw/" + articleId);
+    const markdown = fs.readFileSync("content/" + articleId + ".md", 'utf8')
     
     feed.item({
         title:  article.title,
-        description: response.data,
+        description: marked(data),
         url: `https://blog.drewery.uk/post/${articleId}`,
         date: article.date
     });
 }
 
-// Write the XML to a file
 fs.writeFileSync('rss.xml', feed.xml());
