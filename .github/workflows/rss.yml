@@ -5,6 +5,7 @@ on:
     paths:
     - 'rss/**'
     - 'content/**'
+    - '.github/workflows/rss.yml'
 
 jobs:
   generate-rss:
