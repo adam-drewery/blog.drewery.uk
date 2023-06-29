@@ -10,8 +10,6 @@ internal class SiteContext
     
     public IList<PostDetails> Posts { get; } = new List<PostDetails>();
     
-    public static string RssFeed { get; set; }
-
     public static async Task<SiteContext> InitializeAsync(HttpClient http)
     {
         var siteContext = new SiteContext();
@@ -34,7 +32,7 @@ internal class PostDetails
 
     public string Title { get; set; } = null!;
 
-    public string Date { get; set; } = null!;
+    public string Date { get; set; } = "";
 
     public string[] Tags { get; set; } = Array.Empty<string>();
 }

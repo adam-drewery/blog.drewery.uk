@@ -1,7 +1,48 @@
+@using System.Text
+@using System.ServiceModel.Syndication
+@using System.Xml
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
 @inject SiteContext SiteContext
 @inject IJSRuntime JSRuntime
+@inject IWebAssemblyHostEnvironment HostEnvironment
 
 @code{
+    
+    string rssFeed = "";
+
+    protected override void OnInitialized()
+    {
+        var feed = new SyndicationFeed("Title", "Description", new Uri(HostEnvironment.BaseAddress), "RSSUrl", DateTime.Now);
+        feed.Copyright = new TextSyndicationContent($"{DateTime.Now.Year} Mitchel Sellers");
+
+        var items = new List<SyndicationItem>();
+        foreach (var item in SiteContext.Posts)
+        {
+            var postUrl = HostEnvironment.BaseAddress + "/post/" + item.Id;
+            var title = item.Title;
+            var description = item.Title;
+            
+            items.Add(new SyndicationItem(title, description, new Uri(postUrl), item.Id, DateTimeOffset.Now)); // todo: DATE
+        }
+        feed.Items = items;
+        
+        var settings = new XmlWriterSettings
+        {
+            Encoding = Encoding.UTF8,
+            NewLineHandling = NewLineHandling.Entitize,
+            NewLineOnAttributes = true,
+            Indent = true
+        };
+
+        using var stream = new MemoryStream();
+        using var xmlWriter = XmlWriter.Create(stream, settings);
+        
+        var rssFormatter = new Rss20FeedFormatter(feed, false);
+        rssFormatter.WriteTo(xmlWriter);
+        xmlWriter.Flush();
+        rssFeed = Encoding.UTF8.GetString(stream.ToArray());
+    }
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await JSRuntime.InvokeVoidAsync("setupPhoto");
@@ -88,7 +129,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="@SiteContext.RssFeed">
+                    <a href="data:application/xml;charset=utf-8,@rssFeed" download="rss.xml">
                         <i class="mdi mdi-rss"></i>
                     </a>
                 </li>
