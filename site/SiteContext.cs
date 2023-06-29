@@ -13,7 +13,7 @@ internal class SiteContext
     public static async Task<SiteContext> InitializeAsync(HttpClient http)
     {
         var siteContext = new SiteContext();
-        var posts = await http.GetFromJsonAsync<IDictionary<string, PostDetails>>("posts/index.json")
+        var posts = await http.GetFromJsonAsync<IDictionary<string, PostDetails>>("https://raw.githubusercontent.com/adam-drewery/blog/main/content/index.json")
             ?? throw new InvalidDataException("Failed to get post index");
         
         foreach (var post in posts)

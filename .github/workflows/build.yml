@@ -20,10 +20,10 @@ jobs:
         dotnet-version: 7.0.x
           
     - name: copy index.html to 404.html
-      run: cp wwwroot/index.html wwwroot/404.html
+      run: cp site/wwwroot/index.html site/wwwroot/404.html
           
     - name: .NET Publish
-      run: dotnet publish blog.csproj -c Release -o release --nologo
+      run: dotnet publish site/blog.csproj -c Release -o release --nologo
 
     - name: Disable Jekyll
       run: touch release/wwwroot/.nojekyll
