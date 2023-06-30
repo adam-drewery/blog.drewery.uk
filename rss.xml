@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Fri, 30 Jun 2023 16:06:55 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 30 Jun 2023 16:06:55 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[Setting up a blog in GitHub Pages using Blazor WASM]]></title><description><![CDATA[<h1 id="setting-up-a-blog-in-github-pages-using-blazor-wasm">Setting up a blog in GitHub Pages using Blazor WASM</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Fri, 30 Jun 2023 16:28:58 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 30 Jun 2023 16:28:58 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[How I Set up a Blog in GitHub Pages using Blazor WASM]]></title><description><![CDATA[<h1 id="setting-up-a-blog-in-github-pages-using-blazor-wasm">Setting up a blog in GitHub Pages using Blazor WASM</h1>
 <h3 id="i-achieved-a-blogception-by-creating-a-blog-then-blogging-about-the-blog-from-within-the-blog-itself-this-is-what-ive-decided-to-refer-to-as-recursive-metablogging">I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I&#39;ve decided to refer to as &quot;recursive metablogging&quot;.</h3>
 <p>Anyway, I decided to create this blog to share the ideas and brain thinkings that I sometimes have. It gets quite boring explaining the same thing to different people, so I thought I&#39;d just write it down once and then point people to it.</p>
 <blockquote>
@@ -14,7 +14,7 @@
 <p>I paid for some overpriced crappy template to get me started because my frontend skills aren&#39;t great. By the end though, I&#39;d changed almost everything about it. Anyway, after shimmying that into the blazor project it was ready to push up to the repo.</p>
 <h3 id="configure-github-pages">Configure GitHub Pages</h3>
 <p>By default, GitHub page sites are deployed from the master branch. Obviously this isn&#39;t going to work with a blazor project, we need to get it all compiled up first. So first thing I did was change the deployment method in github to &quot;GitHub Actions&quot;.</p>
-<p><img src="making-a-blog/setup-github-pages.png" alt="configuring github pages" title="configuring github pages"></p>
+<p><img src="https://raw.githubusercontent.com/adam-drewery/blog/main/content/making-a-blog/setup-github-pages.png" alt="configuring github pages" title="configuring github pages"></p>
 <p>At this point I also got the domain name set up, the instructions tell you exactly what to do and it takes about 2 minutes. Plus, I enabled HTTPS-only while I was in here for security and privacy reasons.</p>
 <h3 id="set-up-the-pipeline">Set up the pipeline</h3>
 <p>I&#39;ve not used GitHub actions very much, but I&#39;ve used Azure DevOps a lot and turns ut they&#39;re pretty similar. I just needed to create a new workflow file in the .github/workflows folder. I called it &quot;build.yml&quot; because I&#39;m not very creative.</p>
@@ -70,7 +70,7 @@
 </code></pre>
 <p>Here you can see it uses the same <code>permissions</code> block as in the build job. I also added an <code>environment</code> block to give it a name and a URL.</p>
 <p>Other than that though the release part is really simple. It gets the artifact we uploaded in the previous job and yeets it into GitHub pages, easy peasy.</p>
-<p><img src="making-a-blog/build-github-pages.png" alt="configuring github actions" title="configuring github actions"></p>
+<p><img src="https://raw.githubusercontent.com/adam-drewery/blog/main/content/making-a-blog/build-github-pages.png" alt="configuring github actions" title="configuring github actions"></p>
 <h3 id="fix-the-paths">Fix the paths</h3>
 <p>Using that pipeline, we can successfully deploy the site. With a few caveats...</p>
 <p>Firstly, the site is deployed to a subfolder. So, instead of being at <code>https://adam-drewery.github.io</code> it was at <code>https://adam-drewery.github.io/blog</code>. This is because the repo is called &quot;blog&quot; and that&#39;s the name of the folder the site is deployed to.</p>
@@ -85,6 +85,6 @@
       run: cp site/wwwroot/index.html site/wwwroot/404.html
 </code></pre>
 <p>Probably doesn&#39;t require too much explanation as to what&#39;s going on here... its pretty filthy though, I felt like I had to take a shower afterwards. I wish there was a better way to do this.</p>
-<p>But anyway, if its stupid and it works, then its not stupid! So, I&#39;m happy with it. </p>
+<p>But anyway, if its stupid and it works, then its not stupid! So, I&#39;m happy with it. You can see the completed pipeline yaml file <a href="https://github.com/adam-drewery/blog/blob/main/.github/workflows/build.yml">here</a>.</p>
 <p>I&#39;ll write another post at some point describing how I built the site itself. I had quite a bit of fun with it if I&#39;m honest... frontend development has gotten more fun now I can delegate the tedious bits to ChatGPT. 😎</p>
-]]></description><link>https://blog.drewery.uk/post/making-a-blog</link><guid isPermaLink="true">https://blog.drewery.uk/post/making-a-blog</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
+]]></description><link>https://blog.drewery.uk/making-a-blog</link><guid isPermaLink="true">https://blog.drewery.uk/making-a-blog</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
