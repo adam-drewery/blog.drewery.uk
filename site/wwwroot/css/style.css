@@ -534,10 +534,15 @@ body.enlarged .side-menu {
 
 .post-author-box .socials li a:hover {
     color: #212121 !important;
+    background-color: #ec7600;
 }
 
 .socials li:first-child {
     margin-left: 0;
+}
+
+.socials li a:hover {
+    background-color: #ec7600;
 }
 
 .socials li a {
