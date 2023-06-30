@@ -40,19 +40,25 @@ internal class SiteContext
         
         var posts = await _http.GetFromJsonAsync<IDictionary<string, PostDetails>>(indexUrl)
             ?? throw new InvalidDataException("Failed to get post index");
-        
-        var commentDetails = await _http.GetFromJsonAsync<CommentDetails[]>(commentDetailsUrl)
-            ?? throw new InvalidDataException("Failed to get comments");
-
-        foreach (var postComments in commentDetails)
+        try
         {
-            var title = postComments.Title.Split("/").Last();
-            var commentCount = postComments.Comments;
-            
-            if (posts.TryGetValue(title, out var post)) 
-                post.CommentCount = commentCount;
+            var commentDetails = await _http.GetFromJsonAsync<CommentDetails[]>(commentDetailsUrl)
+                                 ?? throw new InvalidDataException("Failed to get comments");
+
+            foreach (var postComments in commentDetails)
+            {
+                var title = postComments.Title.Split("/").Last();
+                var commentCount = postComments.Comments;
+
+                if (posts.TryGetValue(title, out var post))
+                    post.CommentCount = commentCount;
+            }
         }
-        
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
         foreach (var post in posts)
         {
             post.Value.Id = post.Key;

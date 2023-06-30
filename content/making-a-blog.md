@@ -132,4 +132,4 @@ Probably doesn't require too much explanation as to what's going on here... its 
 
 But anyway, if its stupid and it works, then its not stupid! So, I'm happy with it. You can see the completed pipeline yaml file [here](https://github.com/adam-drewery/blog/blob/main/.github/workflows/build.yml).
 
-I'll write another post at some point describing how I built the site itself. I had quite a bit of fun with it if I'm honest... frontend development has gotten more fun now I can delegate the tedious bits to ChatGPT. 😎
+I'll write another post at some point describing how I built the site itself. I had quite a bit of fun with it if I'm honest... frontend development has gotten more enjoyable now I can delegate the tedious bits to ChatGPT. 😎
