@@ -543,10 +543,11 @@ body.enlarged .side-menu {
 .socials li a {
     display: inline-block;
     margin-top: 0px;
+    margin-left: 5px;
     width: 42px;
     height: 42px;
     line-height: 42px;
-    font-size: 15px;
+    font-size: 20px;
     transition: all 0.5s;
     background-color: #888;
     border-radius: 50%;
