@@ -6,8 +6,15 @@
     <ul>
         @foreach (var post in SiteContext.Posts)
         {
-            <li><a href="/post/@post.Id">@post.Title</a> (@post.Date)</li>
+            <li>
+
+                <div>
+                    <a href="/post/@post.Id">@post.Title</a>
+                </div>
+                <div>
+                    <a style="font-size: x-small" href="/post/@post.Id">@post.Date</a>
+                </div>
+            </li>
         }
     </ul>
-
 </aside>

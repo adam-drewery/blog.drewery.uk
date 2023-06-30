@@ -548,7 +548,7 @@ body.enlarged .side-menu {
     line-height: 42px;
     font-size: 15px;
     transition: all 0.5s;
-    background-color: #4a4a4a;
+    background-color: #888;
     border-radius: 50%;
     color: #212121 !important;
 }
