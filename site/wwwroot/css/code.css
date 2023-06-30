@@ -35,6 +35,7 @@
 }
 
 .hljs-tag,
+.hljs-attr,
 .hljs-name,
 .hljs-bullet,
 .hljs-subst,
@@ -47,7 +48,7 @@
 .hljs-variable,
 .hljs-template-tag,
 .hljs-template-variable {
-    color: #93c763;
+    color: #93c763; !important;
 }
 
 .hljs-string,

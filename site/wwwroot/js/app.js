@@ -3,10 +3,10 @@ window.initializeMenu = () => {
     // $("#side-menu").metisMenu();
     //
     // // Left menu collapse
-    // $('.button-menu-mobile').on('click', function (event) {
-    //     event.preventDefault();
-    //     $("body").toggleClass("enlarged");
-    // });
+    document.querySelector('.button-menu-mobile').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.body.classList.toggle("enlarged");
+    });
 }
 
 window.highlightCode = () => { hljs.highlightAll(); };
