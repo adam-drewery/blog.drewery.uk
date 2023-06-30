@@ -1,11 +1,14 @@
 # Setting up a blog in GitHub Pages using Blazor WASM
-### I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I've decided to refer to as "recursive metablogging".
+
+#### I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I've decided to refer to as "recursive metablogging".
 
 Anyway, I decided to create this blog to share the ideas and brain thinkings that I sometimes have. It gets quite boring explaining the same thing to different people, so I thought I'd just write it down once and then point people to it.
 
 > I'm not sure how often I'll post, but I'll try to keep it regular. I'm also not sure what I'll post about, but I'll try to keep it interesting. I'm also not sure how long I'll keep this up, but I'll try to keep it going for a while.
 
 *- This is what github copilot suggested I should write next*
+
+---
 
 ## Getting started
 
@@ -99,6 +102,8 @@ Here you can see it uses the same `permissions` block as in the build job. I als
 Other than that though the release part is really simple. It gets the artifact we uploaded in the previous job and yeets it into GitHub pages, easy peasy.
 
 ![configuring github actions](https://raw.githubusercontent.com/adam-drewery/blog/main/content/making-a-blog/build-github-pages.png "configuring github actions")
+
+---
 
 ### Fix the paths
 

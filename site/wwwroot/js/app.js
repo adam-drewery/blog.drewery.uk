@@ -56,10 +56,19 @@ window.setupPhoto = () => {
 }
 
 window.fitImages = () => {
-    const images = document.querySelectorAll('.container img');
-    for (let i = 0; i < images.length; i++) {
-        images[i].classList.add('img-fluid');
-    }
+    document.querySelectorAll('.container img').forEach(image => {
+        image.classList.add('img-fluid');
+    });
+    
+    document.querySelectorAll('.container blockquote').forEach(blockQuote => {
+        blockQuote.classList.add('blockquote');
+        blockQuote.classList.add('text-center');
+    });
+    
+    document.querySelectorAll('.container blockquote footer').forEach(blockQuoteFooter => {
+        blockQuoteFooter.classList.add('blockquote-footer');
+        blockQuoteFooter.classList.add('mt-2');
+    });
 }
 
 window.loadUtterances = () => {
