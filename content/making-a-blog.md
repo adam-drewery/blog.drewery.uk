@@ -1,8 +1,6 @@
 # Setting up a blog in GitHub Pages using Blazor WASM
 
-#### I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I've decided to refer to as "recursive metablogging".
-
-Anyway, I decided to create this blog to share the ideas and brain thinkings that I sometimes have. It gets quite boring explaining the same thing to different people, so I thought I'd just write it down once and then point people to it.
+I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I've decided to refer to as "recursive metablogging".
 
 > I'm not sure how often I'll post, but I'll try to keep it regular. I'm also not sure what I'll post about, but I'll try to keep it interesting. I'm also not sure how long I'll keep this up, but I'll try to keep it going for a while.
 
