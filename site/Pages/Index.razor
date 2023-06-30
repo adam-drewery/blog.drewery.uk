@@ -53,11 +53,11 @@
                             </div>
                             <div class="post-preview">
                                 <a href="/#">
-                                    <img src="images/blog/blog-1.jpg" alt="" class="img-fluid rounded">
+                                    <img src="@(Path.Combine(SiteContext.BaseContentAddress, post.Image))" alt="" class="img-fluid rounded">
                                 </a>
                             </div>
                             <div class="post-content">
-                                <p>Whether an identity or campaign, we make your brand visible, relevant and effective by placing the digital at the center of its ecosystem, without underestimating the power of traditional media. Whether an identity or campaign, we make your brand visible.</p>
+                                <p>@post.Description</p>
                             </div>
                         </article>
                     }

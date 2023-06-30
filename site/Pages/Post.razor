@@ -1,4 +1,5 @@
 ﻿@inject HttpClient Http
+@inject SiteContext SiteContext
 @inject IJSRuntime JsRuntime
 @page "/post/{Id}"
 @using Markdig
@@ -12,8 +13,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        var markdown = await Http.GetStringAsync($"https://raw.githubusercontent.com/adam-drewery/blog/main/content/{Id}.md")
-                       ?? throw new InvalidOperationException("Failed to get blog content");
+        var markdown = await Http.GetStringAsync(SiteContext.BaseContentAddress + $"/{Id}.md")
+            ?? throw new InvalidOperationException("Failed to get blog content");
 
         _content = Markdown.ToHtml(markdown);
     }

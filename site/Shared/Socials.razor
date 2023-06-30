@@ -1,3 +1,5 @@
+@inject SiteContext SiteContext
+
 <aside class="widget about-widget">
     <div class="widget-title">Elsewhere</div>
 
@@ -18,7 +20,7 @@
             </a>
         </li>
         <li>
-            <a href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" download="rss.xml">
+            <a href="@SiteContext.BaseContentAddress/../rss.xml" download="rss.xml">
                 <i class="mdi mdi-rss"></i>
             </a>
         </li>

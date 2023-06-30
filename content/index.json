@@ -1,18 +1,11 @@
 {
-  "test1": {
-    "title": "Anti Patterns",
-    "date": "29-06-2023",
-    "image": "test1.jpg",
-    "tags": [
-      "anti patterns"
-    ]
-  },
-  "test2": {
-    "title": "Trolley Problems",
+  "making-a-blog": {
+    "title": "Setting up a blog in GitHub Pages using Blazor WASM",
+    "description": "I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I've decided to refer to as \"recursive metablogging\".",
     "date": "30-06-2023",
-    "image": "test2.jpg",
+    "image": "blogception.png",
     "tags": [
-      "philosophy"
+      "blazor", "dotnet"
     ]
   }
 }
