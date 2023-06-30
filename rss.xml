@@ -1,11 +1,90 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Fri, 30 Jun 2023 12:06:47 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 30 Jun 2023 12:06:47 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[Anti Patterns]]></title><description><![CDATA[<h1 id="when-shit-goes-bad">When shit goes bad</h1>
-<h2 id="a-story-of-two-extremes">A story of two extremes</h2>
-<h3 id="buckle-up-kiddos-its-gonna-be-a-wild-ride">Buckle up kiddos its gonna be a wild ride</h3>
-<h4 id="no-seriously-put-your-seatbelt-on">No seriously, put your seatbelt on</h4>
-<p>Now for code:</p>
-<pre><code class="language-csharp">var func = new FuncyTownUSA(superCool);
-List&lt;string&gt; heyHey = somethingElse;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Fri, 30 Jun 2023 16:06:55 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Fri, 30 Jun 2023 16:06:55 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[Setting up a blog in GitHub Pages using Blazor WASM]]></title><description><![CDATA[<h1 id="setting-up-a-blog-in-github-pages-using-blazor-wasm">Setting up a blog in GitHub Pages using Blazor WASM</h1>
+<h3 id="i-achieved-a-blogception-by-creating-a-blog-then-blogging-about-the-blog-from-within-the-blog-itself-this-is-what-ive-decided-to-refer-to-as-recursive-metablogging">I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I&#39;ve decided to refer to as &quot;recursive metablogging&quot;.</h3>
+<p>Anyway, I decided to create this blog to share the ideas and brain thinkings that I sometimes have. It gets quite boring explaining the same thing to different people, so I thought I&#39;d just write it down once and then point people to it.</p>
+<blockquote>
+<p>I&#39;m not sure how often I&#39;ll post, but I&#39;ll try to keep it regular. I&#39;m also not sure what I&#39;ll post about, but I&#39;ll try to keep it interesting. I&#39;m also not sure how long I&#39;ll keep this up, but I&#39;ll try to keep it going for a while.</p>
+</blockquote>
+<p><em>- This is what github copilot suggested I should write next</em></p>
+<h2 id="getting-started">Getting started</h2>
+<p>Its crazy easy to make a page on GitHub pages. You just create a repo, click a button, then you&#39;&#39;re off. Well, sort of anyway. I also wanted to write something myself using Blazor, because I&#39;m really into Blazor these days. Its not quite as simple as just deploying a bunch of HTML though.</p>
+<h3 id="the-first-step">The first step</h3>
+<p>Obviously the first step was to create a blazor project.</p>
+<pre><code class="language-powershell">dotnet new blazorwasm -o blog
 </code></pre>
-<p><img src="https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg" alt="Alt text" title="a title"></p>
-]]></description><link>https://blog.drewery.uk/post/test1</link><guid isPermaLink="true">https://blog.drewery.uk/post/test1</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[Trolley Problems]]></title><description><![CDATA[<p>#hello</p>
-]]></description><link>https://blog.drewery.uk/post/test2</link><guid isPermaLink="true">https://blog.drewery.uk/post/test2</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
+<p>I paid for some overpriced crappy template to get me started because my frontend skills aren&#39;t great. By the end though, I&#39;d changed almost everything about it. Anyway, after shimmying that into the blazor project it was ready to push up to the repo.</p>
+<h3 id="configure-github-pages">Configure GitHub Pages</h3>
+<p>By default, GitHub page sites are deployed from the master branch. Obviously this isn&#39;t going to work with a blazor project, we need to get it all compiled up first. So first thing I did was change the deployment method in github to &quot;GitHub Actions&quot;.</p>
+<p><img src="making-a-blog/setup-github-pages.png" alt="configuring github pages" title="configuring github pages"></p>
+<p>At this point I also got the domain name set up, the instructions tell you exactly what to do and it takes about 2 minutes. Plus, I enabled HTTPS-only while I was in here for security and privacy reasons.</p>
+<h3 id="set-up-the-pipeline">Set up the pipeline</h3>
+<p>I&#39;ve not used GitHub actions very much, but I&#39;ve used Azure DevOps a lot and turns ut they&#39;re pretty similar. I just needed to create a new workflow file in the .github/workflows folder. I called it &quot;build.yml&quot; because I&#39;m not very creative.</p>
+<p>I started with a regular .NET build and publish. To anyone who&#39;s compiled a .net app before it should be self explanitory:</p>
+<pre><code class="language-yaml">jobs:
+  build:
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+          
+    - name: .NET Publish
+      run: dotnet publish site/blog.csproj -c Release -o release --nologo
+</code></pre>
+<p>Note the <code>permissions</code> section. While I&#39;d given GitHub Actions read and write permissions in its settings, it turns out that wasn&#39;t enough, and I continued to receive errors during the build. This section fixed that.</p>
+<p>I added this part to ensure that GitHub pages was enabled and configured correctly:</p>
+<pre><code class="language-yaml">    - name: Configure Pages
+      uses: actions/configure-pages@v3
+</code></pre>
+<p>By default, GitHub pages assumes your page is being deployed via Jekyll. Since this isn&#39;t the case here, we have to tell GitHub to specifically not do that. Which is kind of weird, but hey, its an easy fix:</p>
+<pre><code class="language-yaml">    - name: Disable Jekyll
+      run: touch release/wwwroot/.nojekyll
+</code></pre>
+<p>Then, I added a step to upload the release folder as an artifact. It seems like this is what GitHub actions needs in order to do the deployment. </p>
+<pre><code class="language-yaml">    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: wwwroot
+        path: &#39;./release/wwwroot&#39;
+</code></pre>
+<p>So, that was the build job. But what about the release part? I got you covered:</p>
+<pre><code class="language-yaml">  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: GitHub Pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:      
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
+</code></pre>
+<p>Here you can see it uses the same <code>permissions</code> block as in the build job. I also added an <code>environment</code> block to give it a name and a URL.</p>
+<p>Other than that though the release part is really simple. It gets the artifact we uploaded in the previous job and yeets it into GitHub pages, easy peasy.</p>
+<p><img src="making-a-blog/build-github-pages.png" alt="configuring github actions" title="configuring github actions"></p>
+<h3 id="fix-the-paths">Fix the paths</h3>
+<p>Using that pipeline, we can successfully deploy the site. With a few caveats...</p>
+<p>Firstly, the site is deployed to a subfolder. So, instead of being at <code>https://adam-drewery.github.io</code> it was at <code>https://adam-drewery.github.io/blog</code>. This is because the repo is called &quot;blog&quot; and that&#39;s the name of the folder the site is deployed to.</p>
+<p>This is a problem because your scripts and styles etc will be looking at <code>adam-drewery.github.io/script.js</code>, whereas it is actualy located in the subfolder <code>adam-drewery.github.io/blog/script.js</code> (emphasis on the <code>/blog/</code> bit).</p>
+<p>My solution to this was simply to configure a domain name to host from (in this case, blog.drewery.uk) However, for anyone not using a domain name, and hosting on the default github.io address, its important to ensure your script and style paths are all relative, and that you add a <code>base</code> tag to the head of the index.html file like this:</p>
+<pre><code class="language-html">&lt;base href=&quot;/blog/&quot; /&gt;
+</code></pre>
+<h3 id="fix-the-routing">Fix the routing</h3>
+<p>The other problem I had was that the routing wasn&#39;t working. I could navigate to the root of the site, but any other page would just return a 404. This is because the routing is handled by the blazor runtime, and the blazor runtime is a javascript file. And javascript files are not included in the artifact we uploaded to GitHub pages.</p>
+<p>So, I added a step to the build job to copy the blazor runtime into the release folder:</p>
+<pre><code class="language-yaml">    - name: copy index.html to 404.html
+      run: cp site/wwwroot/index.html site/wwwroot/404.html
+</code></pre>
+<p>Probably doesn&#39;t require too much explanation as to what&#39;s going on here... its pretty filthy though, I felt like I had to take a shower afterwards. I wish there was a better way to do this.</p>
+<p>But anyway, if its stupid and it works, then its not stupid! So, I&#39;m happy with it. </p>
+<p>I&#39;ll write another post at some point describing how I built the site itself. I had quite a bit of fun with it if I&#39;m honest... frontend development has gotten more fun now I can delegate the tedious bits to ChatGPT. 😎</p>
+]]></description><link>https://blog.drewery.uk/post/making-a-blog</link><guid isPermaLink="true">https://blog.drewery.uk/post/making-a-blog</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
