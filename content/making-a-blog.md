@@ -12,11 +12,11 @@ Anyway, I decided to create this blog to share the ideas and brain thinkings tha
 
 ## Getting started
 
-Its crazy easy to make a page on GitHub pages. You just create a repo, click a button, then you''re off. Well, sort of anyway. I also wanted to write something myself using Blazor, because I'm really into Blazor these days. Its not quite as simple as just deploying a bunch of HTML though.
+Its crazy easy to make a page on GitHub pages. You just create a repo, click a button, then you're off. Well, sort of anyway. I also wanted to write something myself using Blazor, because I'm really into Blazor these days. Its not quite as simple as just deploying a bunch of HTML though.
 
 ### The first step
 Obviously the first step was to create a blazor project.
-```powershell
+```shell
 dotnet new blazorwasm -o blog
 ``` 
 I paid for some overpriced crappy template to get me started because my frontend skills aren't great. By the end though, I'd changed almost everything about it. Anyway, after shimmying that into the blazor project it was ready to push up to the repo.
