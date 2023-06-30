@@ -40,7 +40,7 @@
                                         <i class="mdi mdi-tag-text-outline"></i>    
                                     @foreach (var tag in post.Tags)
                                     {
-                                        <a href="/tag/@tag">@delimiter @tag</a>
+                                        @delimiter <a href="/tag/@tag">@tag</a>
                                         delimiter = ", ";
                                     }
                                     </li>

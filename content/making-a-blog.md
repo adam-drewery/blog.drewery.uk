@@ -119,9 +119,9 @@ My solution to this was simply to configure a domain name to host from (in this 
 
 ### Fix the routing
 
-The other problem I had was that the routing wasn't working. I could navigate to the root of the site, but any other page would just return a 404. This is because the routing is handled by the blazor runtime, and the blazor runtime is a javascript file. And javascript files are not included in the artifact we uploaded to GitHub pages.
+The other problem I had was that the routing wasn't working. I could navigate to the root of the site, but any other page would just return a 404. This is because the routing is handled by the blazor runtime, and the blazor runtime included in `index.html`.
 
-So, I added a step to the build job to copy the blazor runtime into the release folder:
+So, I added a step to the build job to copy the index page to `404.html`, which GitHub pages will use as the 404 page.
 
 ```yaml
     - name: copy index.html to 404.html
