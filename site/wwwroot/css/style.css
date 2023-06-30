@@ -794,8 +794,8 @@ textarea.form-control {
 
 .pagination > .active > a,
 .pagination > .active > span {
-    background: #27cbc0 none repeat scroll 0 0;
-    border-color: #27cbc0;
+    background: #ec7600 none repeat scroll 0 0;
+    border-color: #ec7600;
     color: #bbb;
 }
 
