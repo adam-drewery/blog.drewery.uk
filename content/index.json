@@ -1,7 +1,7 @@
 {
   "making-a-blog": {
-    "title": "Setting up a blog in GitHub Pages using Blazor WASM",
-    "description": "I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I've decided to refer to as \"recursive metablogging\".",
+    "title": "How I Set up a Blog in GitHub Pages using Blazor WASM",
+    "description": "This is an article about how I made this site. It specifically covers how I set up the github pages page, and the github actions pipelines.",
     "date": "30-06-2023",
     "image": "blogception.png",
     "tags": [

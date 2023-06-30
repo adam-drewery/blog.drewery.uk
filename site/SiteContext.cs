@@ -48,7 +48,9 @@ internal class SiteContext
         {
             var title = postComments.Title.Split("/").Last();
             var commentCount = postComments.Comments;
-            posts[title].CommentCount = commentCount;
+            
+            if (posts.TryGetValue(title, out var post)) 
+                post.CommentCount = commentCount;
         }
         
         foreach (var post in posts)

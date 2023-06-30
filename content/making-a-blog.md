@@ -21,7 +21,7 @@ I paid for some overpriced crappy template to get me started because my frontend
 ### Configure GitHub Pages
 By default, GitHub page sites are deployed from the master branch. Obviously this isn't going to work with a blazor project, we need to get it all compiled up first. So first thing I did was change the deployment method in github to "GitHub Actions".
 
-![configuring github pages](making-a-blog/setup-github-pages.png "configuring github pages")
+![configuring github pages](https://raw.githubusercontent.com/adam-drewery/blog/main/content/making-a-blog/setup-github-pages.png "configuring github pages")
 
 At this point I also got the domain name set up, the instructions tell you exactly what to do and it takes about 2 minutes. Plus, I enabled HTTPS-only while I was in here for security and privacy reasons.
 
@@ -98,7 +98,7 @@ Here you can see it uses the same `permissions` block as in the build job. I als
 
 Other than that though the release part is really simple. It gets the artifact we uploaded in the previous job and yeets it into GitHub pages, easy peasy.
 
-![configuring github actions](making-a-blog/build-github-pages.png "configuring github actions")
+![configuring github actions](https://raw.githubusercontent.com/adam-drewery/blog/main/content/making-a-blog/build-github-pages.png "configuring github actions")
 
 ### Fix the paths
 
@@ -127,6 +127,6 @@ So, I added a step to the build job to copy the blazor runtime into the release 
 
 Probably doesn't require too much explanation as to what's going on here... its pretty filthy though, I felt like I had to take a shower afterwards. I wish there was a better way to do this.
 
-But anyway, if its stupid and it works, then its not stupid! So, I'm happy with it. 
+But anyway, if its stupid and it works, then its not stupid! So, I'm happy with it. You can see the completed pipeline yaml file [here](https://github.com/adam-drewery/blog/blob/main/.github/workflows/build.yml).
 
 I'll write another post at some point describing how I built the site itself. I had quite a bit of fun with it if I'm honest... frontend development has gotten more fun now I can delegate the tedious bits to ChatGPT. 😎

@@ -24,7 +24,7 @@ for (const articleId in index) {
     feed.item({
         title:  article.title,
         description: marked(markdown),
-        url: `https://blog.drewery.uk/post/${articleId}`,
+        url: `https://blog.drewery.uk/${articleId}`,
         date: article.date,
         author: 'Adam Drewery',
     });
