@@ -27,7 +27,7 @@ By default, GitHub page sites are deployed from the master branch. Obviously thi
 At this point I also got the domain name set up, the instructions tell you exactly what to do and it takes about 2 minutes. Plus, I enabled HTTPS-only while I was in here for security and privacy reasons.
 
 ### Set up the pipeline
-I've not used GitHub actions very much, but I've used Azure DevOps a lot and turns ut they're pretty similar. I just needed to create a new workflow file in the .github/workflows folder. I called it "build.yml" because I'm not very creative.
+I've not used GitHub actions very much, but I've used Azure DevOps a lot and turns out they're pretty similar. I just needed to create a new workflow file in the .github/workflows folder. I called it "build.yml" because I'm not very creative.
 
 I started with a regular .NET build and publish. To anyone who's compiled a .net app before it should be self explanitory:
 
