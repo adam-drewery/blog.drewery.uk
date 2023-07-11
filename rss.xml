@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Wed, 05 Jul 2023 09:19:33 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 05 Jul 2023 09:19:33 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[How I Set up a Blog in GitHub Pages using Blazor WASM]]></title><description><![CDATA[<h1 id="setting-up-a-blog-in-github-pages-using-blazor-wasm">Setting up a blog in GitHub Pages using Blazor WASM</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Tue, 11 Jul 2023 16:39:32 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 11 Jul 2023 16:39:32 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[How I Set up a Blog in GitHub Pages using Blazor WASM]]></title><description><![CDATA[<h1 id="setting-up-a-blog-in-github-pages-using-blazor-wasm">Setting up a blog in GitHub Pages using Blazor WASM</h1>
 <p>I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I&#39;ve decided to refer to as &quot;recursive metablogging&quot;.</p>
 <blockquote>
 <p>I&#39;m not sure how often I&#39;ll post, but I&#39;ll try to keep it regular. I&#39;m also not sure what I&#39;ll post about, but I&#39;ll try to keep it interesting. I&#39;m also not sure how long I&#39;ll keep this up, but I&#39;ll try to keep it going for a while.</p>
@@ -88,4 +88,112 @@
 <p>Probably doesn&#39;t require too much explanation as to what&#39;s going on here... its pretty filthy though, I felt like I had to take a shower afterwards. I wish there was a better way to do this.</p>
 <p>But anyway, if its stupid and it works, then its not stupid! So, I&#39;m happy with it. You can see the completed pipeline yaml file <a href="https://github.com/adam-drewery/blog/blob/main/.github/workflows/build.yml">here</a>.</p>
 <p>I&#39;ll write another post at some point describing how I built the site itself. I had quite a bit of fun with it if I&#39;m honest... frontend development has gotten more enjoyable now I can delegate the tedious bits to ChatGPT. 😎</p>
-]]></description><link>https://blog.drewery.uk/making-a-blog</link><guid isPermaLink="true">https://blog.drewery.uk/making-a-blog</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
+]]></description><link>https://blog.drewery.uk/making-a-blog</link><guid isPermaLink="true">https://blog.drewery.uk/making-a-blog</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item><item><title><![CDATA[The registry of singletons pattern, a.k.a. why all my homies hate enums]]></title><description><![CDATA[<h1 id="the-registry-of-singletons-pattern">The registry of singletons pattern</h1>
+<h4 id="aka-why-all-my-homies-hate-enums">AKA why all my homies hate enums.</h4>
+<p>Enums are great. Well, they&#39;re OK anyway. Its a nice thing to be able to assign labels to numbers but that&#39;s about all they&#39;re good for. They&#39;re not very extensible, and they&#39;re not very encapsulated. </p>
+<h3 id="the-problem">The problem</h3>
+<p>Oftentimes I&#39;ve seen an innocent looking enum defined and used like this:</p>
+<pre><code class="language-csharp">public enum Country
+{
+    Germany,
+    France,
+    Mexico
+}
+
+public class Person
+{
+    public string Name { get; set; }
+
+    public Country Country { get; set; }
+}
+</code></pre>
+<p>Everything seems alright so far. I can create a person and set their country to Germany. But inevitably, we end up needing to perform some sort of logic relating to this enum. And, since enums cannot contain logic, we inevitably end up with at least one, but often more, switch statements littered throughout our codebase: </p>
+<pre><code class="language-csharp">
+public int GetSalesTaxRate(Person person)
+{
+    switch(person.Country)
+    {
+        case Country.Germany:
+            return 19;
+        case Country.France:
+            return 20;
+        case Country.Mexico:
+            return 16;
+    }
+}
+</code></pre>
+<p>The major problem here is a lack of encapsulation. This also violates the open/closed principle, because if we need to add a new country, we have to go and modify this method, and all the other ones which operate on the <code>Country</code> property of a person. It should be pretty clear why this is a problem...</p>
+<h3 id="the-solution">The solution</h3>
+<p>This is a variation of the &quot;Registry of Singletons&quot; pattern. We can see it in use in the .NET framework itself, for example in the <code>System.Drawing.Color</code> class and <code>System.Text.Encoding</code>, to name a couple.</p>
+<p>For starters we need a class, with a private constructor:</p>
+<pre><code class="language-csharp">public class Country
+{
+    private Country(string name, int salesTaxRate)
+    {
+        Name = name;
+        SalesTaxRate = salesTaxRate;
+    }
+
+    public string Name { get; }
+
+    public int SalesTaxRate { get; }
+}
+</code></pre>
+<p>We make the constructor private so clients cannot accidentally add new countries. We also make the properties read-only, so they cannot be modified after the object is created. Next we just add our countries as static properties:</p>
+<pre><code class="language-csharp">public class Country
+{
+    private Country(string name, int salesTaxRate)
+    {
+        Name = name;
+        SalesTaxRate = salesTaxRate;
+    }
+
+    public string Name { get; }
+
+    public int SalesTaxRate { get; }
+
+    public static Country Germany { get; } = new Country(&quot;Germany&quot;, 19);
+
+    public static Country France { get; } = new Country(&quot;France&quot;, 20);
+
+    public static Country Mexico { get; } = new Country(&quot;Mexico&quot;, 16);
+}
+</code></pre>
+<p>Hey presto! It works just like an enum. In fact, sometimes people might not even realise its not an enum. But now we can access rich data about the countries, and its impossible to add new countries without also being forced to include required information such as the sales tax rate.</p>
+<h3 id="exposing-it-as-an-ienumerable">Exposing it as an <code>IEnumerable</code></h3>
+<p>Sometimes we want to expose our list of countries as an <code>IEnumerable</code> and be able to look them up by name. This is easy to do with a static property that uses reflection:</p>
+<pre><code class="language-csharp">    public static IDictionary&lt;string, Country&gt; All =&gt; this.GetType().GetProperties(BindingFlags.Public | BindingFlags.Static)
+        .Where(p =&gt; p.PropertyType == typeof(Country))
+        .Select(p =&gt; p.GetValue(null))
+        .Cast&lt;Country&gt;()
+        .ToDictionary(c =&gt; c.Name, c =&gt; c);
+}
+</code></pre>
+<p>If you write a lot of these types of classes, it might even save you time to put this into an extension method or base class.</p>
+<h3 id="but-what-about-serialization">But what about serialization?</h3>
+<p>Its nice to have these rich objects, but sometimes we need to serialize them. For example, if we&#39;re sending them over the wire, or storing them in a database.</p>
+<p>A custom JSON converter may feel like a lot of work but it really isn&#39;t. This one will work specifically for the <code>Country</code> class we defined above, however, if you choose to implement these with a base class or interface, you can make a generic version of this converter that will work for all of them.</p>
+<pre><code class="language-csharp:">
+public class CountryConverter : JsonConverter
+{
+    public override bool CanConvert(Type objectType)
+    {
+        return objectType == typeof(Country);
+    }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+        JObject jsonObject = JObject.Load(reader);
+        string name = jsonObject.Value&lt;string&gt;();
+        return Country.All[name];
+    }
+
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+        Country country = (Country)value;
+        writer.WriteValue(country.Name);
+    }
+}
+</code></pre>
+<p>And that&#39;s it! Now you have a fully encapsulated enum-like object that can be serialized and deserialized, and you can add as many properties and methods as you like to it. Maybe you have some ideas on how this pattern could be improved? Let me know!</p>
+]]></description><link>https://blog.drewery.uk/registry-of-singletons</link><guid isPermaLink="true">https://blog.drewery.uk/registry-of-singletons</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Tue, 07 Nov 2023 00:00:00 GMT</pubDate></item></channel></rss>
