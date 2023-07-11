@@ -26,40 +26,7 @@
                 <div class="col-xl-8">
                     @foreach (var post in SiteContext.Posts)
                     {
-                        <article class="post">
-                            <div class="post-header">
-                                <h2 class="post-title">
-                                    <a href="/@post.Id">@post.Title</a>
-                                </h2>
-                                <ul class="post-meta">
-                                    <li>
-                                        <i class="mdi mdi-calendar"></i> @post.Date
-                                    </li>
-                                    @{ var delimiter = ""; }
-                                    <li>
-                                        <i class="mdi mdi-tag-text-outline"></i>    
-                                    @foreach (var tag in post.Tags)
-                                    {
-                                        @delimiter <a href="/tag/@tag">@tag</a>
-                                        delimiter = ", ";
-                                    }
-                                    </li>
-                                    <li>
-                                        <i class="mdi mdi-comment-multiple-outline"></i>
-                                        @{ var commentLabel = post.CommentCount == 1 ? "comment" : "comments"; }
-                                        <a href="/@post.Id">@post.CommentCount @commentLabel</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="post-preview">
-                                <a href="/@post.Id">
-                                    <img src="@(Path.Combine(SiteContext.BaseContentAddress, post.Id, post.Image))" alt="" class="img-fluid rounded">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <p>@post.Description</p>
-                            </div>
-                        </article>
+                        <PostTitle Post="@post" />
                     }
                     <Pagination />
                 </div>

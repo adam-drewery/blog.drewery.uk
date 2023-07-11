@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace blog;
 
-internal class SiteContext
+public class SiteContext
 {
     private readonly HttpClient _http;
 
@@ -67,14 +67,14 @@ internal class SiteContext
     }
 }
 
-internal class CommentDetails
+public class CommentDetails
 {
     public string Title { get; set; } = null!;
 
     public int Comments { get; set; }
 }
 
-internal class PostDetails
+public class PostDetails
 {
     public string Id { get; set; } = null!;
 

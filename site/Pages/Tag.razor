@@ -36,37 +36,7 @@
                     @{ var posts = SiteContext.Posts.Where(p => p.Tags.Contains(Name)); }
                     @foreach (var post in posts)
                     {
-                        <article class="post">
-                            <div class="post-header">
-                                <h2 class="post-title">
-                                    <a href="/@post.Id">@post.Title</a>
-                                </h2>
-                                <ul class="post-meta">
-                                    <li>
-                                        <i class="mdi mdi-calendar"></i> @post.Date
-                                    </li>
-                                    @{ var delimiter = ""; }
-                                    @foreach (var tag in post.Tags)
-                                    {
-                                        <li>
-                                            <i class="mdi mdi-tag-text-outline"></i> <a href="/#">@tag@delimiter</a>
-                                        </li>
-                                        delimiter = ", ";
-                                    }
-                                    <li>
-                                        <i class="mdi mdi-comment-multiple-outline"></i> <a href="/#">0 Comments</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="post-preview">
-                                <a href="/#">
-                                    <img src="/images/blog/blog-1.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                            </div>
-                            <div class="post-content">
-                                <p>Whether an identity or campaign, we make your brand visible, relevant and effective by placing the digital at the center of its ecosystem, without underestimating the power of traditional media. Whether an identity or campaign, we make your brand visible.</p>
-                            </div>
-                        </article>
+                        <PostTitle Post="@post" />
                     }
                     <Pagination />
                 </div>
