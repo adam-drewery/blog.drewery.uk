@@ -3,9 +3,18 @@
     "title": "How I Set up a Blog in GitHub Pages using Blazor WASM",
     "description": "This is an article about how I made this site. It specifically covers how I set up the github pages page, and the github actions pipelines.",
     "date": "30-06-2023",
-    "image": "blogception.png",
+    "image": "title.png",
     "tags": [
       "blazor", "dotnet"
+    ]
+  },
+  "registry-of-singletons": {
+    "title": "The registry of singletons pattern, a.k.a. why all my homies hate enums",
+    "description": "This is a pattern I find myself using often. Enums are great, but they have some limitations. This pattern is a way to get around those limitations.",
+    "date": "11-07-2023",
+    "image": "title.png",
+    "tags": [
+      "patterns", "dotnet"
     ]
   }
 }
