@@ -95,7 +95,8 @@ Hey presto! It works just like an enum. In fact, sometimes people might not even
 Sometimes we want to expose our list of countries as an `IEnumerable` and be able to look them up by name. This is easy to do with a static property that uses reflection:
 
 ```csharp
-    public static IDictionary<string, Country> All => this.GetType().GetProperties(BindingFlags.Public | BindingFlags.Static)
+    public static IDictionary<string, Country> All => typeof(Country)
+        .GetProperties(BindingFlags.Public | BindingFlags.Static)
         .Where(p => p.PropertyType == typeof(Country))
         .Select(p => p.GetValue(null))
         .Cast<Country>()
