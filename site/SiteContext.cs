@@ -59,7 +59,7 @@ public class SiteContext
             Console.WriteLine(e);
         }
 
-        foreach (var post in posts)
+        foreach (var post in posts.Reverse())
         {
             post.Value.Id = post.Key;
             Posts.Add(post.Value);
