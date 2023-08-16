@@ -16,5 +16,14 @@
     "tags": [
       "patterns", "dotnet"
     ]
+  },
+  "linq-query-encapsulation": {
+    "title": "Cleanly encapsulating LINQ queries",
+    "description": "This is a technique I use all the time to write clean and maintainable LINQ queries, for use with entity framework.",
+    "date": "16-08-2023",
+    "image": "title.png",
+    "tags": [
+      "patterns", "dotnet", "linq"
+    ]
   }
 }
