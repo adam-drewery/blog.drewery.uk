@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Wed, 12 Jul 2023 08:13:30 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 12 Jul 2023 08:13:30 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[How I Set up a Blog in GitHub Pages using Blazor WASM]]></title><description><![CDATA[<h1 id="setting-up-a-blog-in-github-pages-using-blazor-wasm">Setting up a blog in GitHub Pages using Blazor WASM</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Adam Drewery's Blog]]></title><description><![CDATA[Adam Drewery's Blog]]></description><link>blog.drewery.uk</link><generator>RSS for Node</generator><lastBuildDate>Wed, 16 Aug 2023 16:39:12 GMT</lastBuildDate><atom:link href="https://raw.githubusercontent.com/adam-drewery/blog/main/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 16 Aug 2023 16:39:12 GMT</pubDate><language><![CDATA[en]]></language><managingEditor><![CDATA[Adam Drewery]]></managingEditor><webMaster><![CDATA[Adam Drewery]]></webMaster><item><title><![CDATA[How I Set up a Blog in GitHub Pages using Blazor WASM]]></title><description><![CDATA[<h1 id="setting-up-a-blog-in-github-pages-using-blazor-wasm">Setting up a blog in GitHub Pages using Blazor WASM</h1>
 <p>I achieved a blogception by creating a blog then blogging about the blog from within the blog itself. This is what I&#39;ve decided to refer to as &quot;recursive metablogging&quot;.</p>
 <blockquote>
 <p>I&#39;m not sure how often I&#39;ll post, but I&#39;ll try to keep it regular. I&#39;m also not sure what I&#39;ll post about, but I&#39;ll try to keep it interesting. I&#39;m also not sure how long I&#39;ll keep this up, but I&#39;ll try to keep it going for a while.</p>
@@ -197,4 +197,109 @@ public class CountryConverter : JsonConverter
 }
 </code></pre>
 <p>And that&#39;s it! Now you have a fully encapsulated enum-like object that can be serialized and deserialized, and you can add as many properties and methods as you like to it. Maybe you have some ideas on how this pattern could be improved? Let me know!</p>
-]]></description><link>https://blog.drewery.uk/registry-of-singletons</link><guid isPermaLink="true">https://blog.drewery.uk/registry-of-singletons</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Tue, 07 Nov 2023 00:00:00 GMT</pubDate></item></channel></rss>
+]]></description><link>https://blog.drewery.uk/registry-of-singletons</link><guid isPermaLink="true">https://blog.drewery.uk/registry-of-singletons</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Tue, 07 Nov 2023 00:00:00 GMT</pubDate></item><item><title><![CDATA[Cleanly encapsulating LINQ queries]]></title><description><![CDATA[<h1 id="linq-query-encapsulation">LINQ Query Encapsulation</h1>
+<h2 id="problem">Problem</h2>
+<p>Over the years I&#39;ve seen a lot of different approaches to encapsulating LINQ queries. One of the most common approaches is to use some sort of Repository class that exposes methods containing specific queries. They usually look something like this:</p>
+<pre><code class="language-csharp">public class InvoiceRepository : IRepository&lt;Invoice&gt;
+{
+    public Invoice GetInvoiceById(int id)
+    {
+        return _context.Invoices.FirstOrDefault(x =&gt; x.Id == id);
+    }
+
+    public IEnumerable&lt;Invoice&gt; GetInvoicesForCustomerId(int customerId)
+    {
+        var now = DateTime.Now;
+        return _context.Invoices
+            .Include(x =&gt; x.Customer)
+            .Where(x =&gt; x.CustomerId == customerId &amp;&amp; x.Status == InvoiceStatus.Paid)
+            .Where(x =&gt; x.PublishDate == null || x.PublishDate &lt;= now)
+            .OrderByDescending(x =&gt; x.Date)
+            .Take(10);
+    }
+}
+</code></pre>
+<p>This approach has a few problems. First, it&#39;s not very flexible. If you need to query the same data in a slightly different way, you have to add a new method to the repository. Second, it&#39;s not very testable. If you want to test the logic that uses the repository, you have to mock the repository.</p>
+<p>Furthermore- the second method there doesn&#39;t really say exactly what its doing. One might rationally presume that <code>GetInvoicesForCustomerId</code> <em>just</em> retrieves invoices. But this one filters by other values, specifies includes, and orders the results.</p>
+<p>Perhaps a more appropriate name for this method would be <code>GetInvoicesAndIncludeCustomerForCustomerIdAndStatusAndLimitToTen</code>. But that&#39;s a bit of a mouthful isn&#39;t it.</p>
+<h2 id="cant-we-parameterize-it">Can&#39;t we parameterize it?</h2>
+<p>One approach to solving this problem is to parameterize the query method. We could do something like this:</p>
+<pre><code class="language-csharp">public IEnumerable&lt;Invoice&gt; GetInvoices(int? customerId = null, InvoiceStatus? status = null, int? limit = null)
+{
+    var now = DateTime.Now;
+    var query = _context.Invoices
+        .Include(x =&gt; x.Customer)
+        .Where(x =&gt; x.PublishDate == null || x.PublishDate &lt;= now);
+    
+    if (customerId.HasValue)
+    {
+        query = query.Where(x =&gt; x.CustomerId == customerId.Value);
+    }
+    
+    if (status.HasValue)
+    {
+        query = query.Where(x =&gt; x.Status == status.Value);
+    }
+    
+    if (limit.HasValue)
+    {
+        query = query.Take(limit.Value);
+    }
+    
+    return query;
+}
+</code></pre>
+<p>The obvious issues here are, your method signature is going to grow larger and larger as more things are parameterized. Sure, you could put all of these in some sort of <code>Filter</code> class, but still, its not clear to the client how these parameters are being concatenated. Are they ANDed together? ORed together? Are they mutually exclusive? It&#39;s not clear.  </p>
+<h2 id="business-logic-vs-presentation-logic">Business Logic vs. Presentation Logic</h2>
+<p>One of the fundamental issues here is that we&#39;re trying to encapsulate two different things in the same method. We&#39;re trying to encapsulate the business logic of retrieving invoices, what makes an invoice viewable by the customer, and the presentation logic of how to display them.</p>
+<p>Let&#39;s separate those two things out. First, lets try to encapsulate what it means for an invoice to be &quot;published&quot;, or &quot;paid&quot; using extension methods:</p>
+<pre><code class="language-csharp">public static class QueryableExtensions
+{
+    public static IQueryable&lt;Invoice&gt; Published(this IQueryable&lt;Invoice&gt; invoices)
+    {
+        var now = DateTime.Now;
+        return invoices.Where(x =&gt; x.PublishDate == null || x.PublishDate &gt;= now);
+    }
+    
+    public static IQueryable&lt;Invoice&gt; ForCustomer(this IQueryable&lt;Invoice&gt; invoices, int customerId)
+    {
+        return invoices.Where(x =&gt; x.CustomerId == customerId)
+    }
+    
+    public static IQueryable&lt;Invoice&gt; Paid(this IQueryable&lt;Invoice&gt; invoices)
+    {
+        return invoices.Where(x =&gt; x.Status == InvoiceStatus.Paid);
+    }
+}
+</code></pre>
+<p>Now, we can use these extension methods to build up our query:</p>
+<pre><code class="language-csharp">_context.Invoices
+    .Include(x =&gt; x.Customer)
+    .ForCustomer(customerId)
+    .Paid()
+    .Published()
+    .OrderByDescending(x =&gt; x.Date)
+    .Take(10);
+</code></pre>
+<p>Now our business logic is cleanly encapsulated somewhere else, what we have left here is pure presentation logic.</p>
+<h2 id="improving-the-design">Improving the design</h2>
+<p>One of the beautiful things about LINQ is that we can re-use our logic for database queries as well as filtering objects client-side. With Blazor, we can potentially even use this same logic in the browser.</p>
+<p>But, we need to make some changes to accomodate that. We <em>could</em> have duplicated extension methods for <code>IEnumerable&lt;Invoice&gt;</code> and <code>IQueryable&lt;Invoice&gt;</code>, but that would be a bit of a nightmare to maintain. Instead, we can do the following:</p>
+<pre><code class="language-csharp">public static IQueryable&lt;Invoice&gt; Published(this IEnumerable&lt;Invoice&gt; invoices)
+{
+    var now = DateTime.Now;
+    return invoices.AsQueryable().Where(x =&gt; x.PublishDate == null || x.PublishDate &gt;= now);
+}
+</code></pre>
+<p>Note that the method now accepts any old <code>IEnumerable</code>, but we convert it to an <code>IQueryable</code> before applying the filter. This means that we can use the same extension method for both IEnumerable and IQueryable.</p>
+<p>If the underlying implementation is not an IQueryable, then the filter will be performed client-side.</p>
+<h2 id="generic-versions">Generic versions</h2>
+<p>Of course, there&#39;s nothing stopping you from writing generic versions of these extension methods. Assuming <code>Invoice</code> implements an <code>IHasName</code> interface, here&#39;s an example:</p>
+<pre><code class="language-csharp">public static IQueryable&lt;T&gt; WithName(this IEnumerable&lt;T&gt; entities, string name) where T : IHasName, class
+{
+    return entities.AsQueryable().Where(x =&gt; x.Name == name);
+}
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>The examples I&#39;ve provided are simple, but hopefully they show the advantages this technique has over the repository approach. First, it&#39;s more flexible. You can easily compose queries in different ways. Second, it&#39;s more testable. These extension methods are pure functions so you can test the logic that uses the query without having to mock anything. Lastly, it&#39;s more readable. The query is more declarative, and the method names are more descriptive.</p>
+]]></description><link>https://blog.drewery.uk/linq-query-encapsulation</link><guid isPermaLink="true">https://blog.drewery.uk/linq-query-encapsulation</guid><dc:creator><![CDATA[Adam Drewery]]></dc:creator><pubDate>Invalid Date</pubDate></item></channel></rss>
